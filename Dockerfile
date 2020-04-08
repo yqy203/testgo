@@ -10,5 +10,3 @@ RUN go build .
 RUN ls -l
 EXPOSE 6064
 ENTRYPOINT  ["./apiserver"]
-
-kill -9 $(ps -ef | grep ./apiserver | grep -v grep | awk '{print $2}')
