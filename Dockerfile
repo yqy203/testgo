@@ -1,12 +1,14 @@
 FROM golang:1.12.4
 
-WORKDIR /usr/local/go/src/testgo
+WORKDIR /usr/local/go/src/apiserver
 COPY vendor /usr/local/go/src/
-COPY . /usr/local/go/src/testgo
+COPY . /usr/local/go/src/apiserver
 RUN ls -l
 RUN pwd
-RUN cd /usr/local/go/src/testgo/
+RUN cd /usr/local/go/src/apiserver/
 RUN go build .
 RUN ls -l
 EXPOSE 6064
-ENTRYPOINT  ["./testgo"]
+ENTRYPOINT  ["./apiserver"]
+
+kill -9 $(ps -ef | grep ./apiserver | grep -v grep | awk '{print $2}')
